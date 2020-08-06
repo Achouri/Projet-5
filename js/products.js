@@ -1,7 +1,7 @@
 /*Génération de l'URL de l'API selon le choix de produit à vendre
 **********************************************/
 
-const produitSell = "cameras"  //Au choix entre : "cameras" - "furniture" - "teddies"
+const produitSell = "cameras" ; //Au choix entre : "cameras" - "furniture" - "teddies"
 const APIURL = "http://localhost:3000/api/" + produitSell + "/";
 
 //id du produit pour permettre un tri dans l'API
@@ -430,7 +430,7 @@ resultOrder = () =>{
     //Implatation de prénom et de id de commande dans le html sur la page de confirmation
     document.getElementById("lastName").innerHTML = order.contact.lastName
     document.getElementById("orderId").innerHTML = order.orderId
-
+    
     
     //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
     sessionStorage.removeItem("order");

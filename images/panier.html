@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/panier.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<title>Votre panier ORINOCO</title>
+	<meta name="description" content="ORINOCO est un site de vente en ligne d'ours en peluche, de meubles en bois d'est de caméras anciennes">
+</head>
+<body class="container">
+	<header>
+		<div class="dropdown">
+			<div class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			<div class="dropdown-content">
+			  <a href="product.html">Produits</a>
+			  <a href="panier.html">Panier</a>
+			</div>
+		</div>
+		<a href="index.html"><img src="images/orinoco.png" alt="logo du site" /></a>
+		<a href="panier.html"><i class="fa fa-cart-plus" aria-hidden="true" style="font-size:35px"></i></a>
+
+	</header>
+	<main class="basket flex-block">
+		<div id="basket-resume">
+			<p id="panierVide">Votre panier est vide !!!</p>
+		</div>
+		<div class="autreArticle">
+			<a class="autre" href="index.html" aria-label="Choisir un autre produit">Un autre produit ?</a>
+		</div>
+		<div class="form">
+			<form method="post" name="form-panier">
+				
+					<legend>mes cordonnés</legend>
+
+					<label for="formNom">Nom : </label>
+					<input type="text" id="formNom" class="form-control input-control" required name="formNom">
+
+					<label for="formPrenom" class="right-inline">Prénom :</label>
+					<input type="text" id="formPrenom" class="form-control input-control" required name="formPrenom">
+
+					<label for="formMail">E-mail :</label>
+					<input type="email" id="formMail" class="form-control input-control" required name="formMail">
+
+					<label for="formAdresse">Adresse :</label>
+					<input type="text" id="formAdresse" class="form-control input-control" required name="formAdresse">
+
+					<label for="formVille">Ville :</label>
+					<input type="text" id="formVille" class="form-control input-control" required name="formVille">
+					
+				 
+					<button type="button"  class="btn btn--form" id="envoiPost">Passer la commande</button>
+			</form>
+		</div>
+	</main>
+	<footer>
+		<p>Site E-commerce de Projet 5 de Parcours Développeur web junior <br>Achouri Alaeddine</p>
+	</footer>
+	<script src="js/products.js"></script>
+	<script>
+		addition();
+		validForm()
+	</script>
+</body>
+</html>
