@@ -430,6 +430,7 @@ resultOrder = () =>{
     //Implatation de prénom et de id de commande dans le html sur la page de confirmation
     document.getElementById("lastName").innerHTML = order.contact.lastName
     document.getElementById("orderId").innerHTML = order.orderId
+    document.getElementById("date").innerHTML = Date();
     
     
     //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
