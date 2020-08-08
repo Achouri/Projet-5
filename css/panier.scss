@@ -3,7 +3,13 @@ body{
     margin:0px;
     padding: 0px;
 }
-
+//style erreur "panier est vide"
+//------------------------------
+#panierVide{
+  text-align: center;
+  font-size: 25px;
+  color: blue;
+}
 // style de tableau de panier
 //---------------------------
 

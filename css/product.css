@@ -143,6 +143,10 @@ h2 {
   margin-bottom: 0px;
 }
 
+main {
+  height: 71vh;
+}
+
 #error {
   width: 70%;
   border: 1px solid #2196f3;

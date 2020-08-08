@@ -1,7 +1,7 @@
 /*Génération de l'URL de l'API selon le choix de produit à vendre
 **********************************************/
 
-const produitSell = "cameras" ; //Au choix entre : "cameras" - "furniture" - "teddies"
+const produitSell = "cameras";  //Au choix entre : "cameras" - "furniture" - "teddies"
 const APIURL = "http://localhost:3000/api/" + produitSell + "/";
 
 //id du produit pour permettre un tri dans l'API
@@ -117,21 +117,21 @@ getProduits = () =>{
 async function detailProduit(){
     //Collecter l'URL après le ?id= pour le récupérer uniquement sur l'API
     idProduit = location.search.substring(4);
+    if (idProduit != ""){
     const produitSelected = await getProduits();
     console.log("Administration : Vous regardez la page du produit id_"+produitSelected._id);
 
     //Faire apparaitre la fiche produit initialement en display none
     let section = document.getElementById("section");
     section.style.display = "block";
-    
     //Remplissage de la fiche produit
     document.getElementById("imgProduct").setAttribute("src", produitSelected.imageUrl);
     document.getElementById("nameProduct").innerHTML = produitSelected.name;
     document.getElementById("descriptionProduct").innerHTML = produitSelected.description;
     document.getElementById("priceProduct").innerHTML = produitSelected.price / 100 + " euros";
 
-    
-    //Selon le type de produit (ligne 3) création des options
+    //Utilisation de l'instruction switch pour le cas de 3produits (camera/furniture/teddies)
+    //Création des options selon le type de produit (ligne 3) 
     switch(produitSell){
     	case "cameras":
     	produitSelected.lenses.forEach((produit)=>{
@@ -154,6 +154,10 @@ async function detailProduit(){
     	default:
     	console.log("Administration : Veuillez bien renseigner la variable produitSell ligne 2 du fichier script.js");
     }
+    }
+  else{
+    document.getElementById("section").remove();
+  }
 };
 
  /*Fonction ajouter le produit au panier de l'utilisateur
@@ -295,31 +299,31 @@ addition = () =>{
 
       //tests des différents input du formulaire
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(formNom) == true || checkSpecialCharacter.test(formNom) == true || formNom == ""){
+        if(checkNumber.test(formNom) === true || checkSpecialCharacter.test(formNom) === true || formNom === ""){
         	checkMessage = "Vérifier/renseigner votre nom";
         }else{
         	console.log("Administration : Nom ok");
         };
         //Test du nom => aucun chiffre ou charactère spécial permis
-        if(checkNumber.test(formPrenom) == true || checkSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
+        if(checkNumber.test(formPrenom) === true || checkSpecialCharacter.test(formPrenom) === true || formPrenom === ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
         }else{
         	console.log("Administration : Prénom ok");
         };
         //Test du mail selon le regex de la source L256
-        if(checkMail.test(formMail) == false){
+        if(checkMail.test(formMail) === false){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
         }else{
         	console.log("Administration : Adresse mail ok");
         };
         //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
-        if(checkSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
+        if(checkSpecialCharacter.test(formAdresse) === true || formAdresse === ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
         }else{
         	console.log("Administration : Adresse ok");
         };
         //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
-        if(checkSpecialCharacter.test(formVille) == true && checkNumber.test(formVille) == true || formVille == ""){
+        if(checkSpecialCharacter.test(formVille) === true && checkNumber.test(formVille) === true || formVille === ""){
         	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
         }else{
         	console.log("Administration : Ville ok")
@@ -346,13 +350,14 @@ addition = () =>{
   //Vérifier qu'il y ai au moins un produit dans le panier
   let etatPanier = JSON.parse(localStorage.getItem("userPanier"));
   //Si le panier est vide ou null (suppression localStorage par)=>alerte
-  if(etatPanier == null){
-	//Si l'utilisateur à supprimer son localStorage etatPanier sur la page basket.html et qu'il continue le process de commande
+  if(etatPanier === null){
+	//Si l'utilisateur à supprimer son localStorage etatPanier sur la page panier.html et qu'il continue le process de commande
 	alert("Il y a eu un problème avec votre panier, une action non autorisée a été faite. Veuillez recharger la page pour la corriger");
 	return false
-}else if(etatPanier.length < 1 || etatPanier == null){
+}else if(etatPanier.length < 1 || etatPanier === null){
 	console.log("Administration: ERROR =>le localStorage ne contient pas de panier")
-	alert("Votre panier est vide");
+  alert("Votre panier est vide");
+  window.open("./index.html");
 	return false;
 }else{
 	console.log("Administration : Le panier n'est pas vide")
@@ -368,7 +373,7 @@ addition = () =>{
 /*Envoi du formulaire
 **********************************************/
 
-  //Fonction requet post de l'API
+  //Fonction request post de l'API
   envoiDonnees = (objetRequest) => {
   	return new Promise((resolve)=>{
   		let request = new XMLHttpRequest();
@@ -389,7 +394,7 @@ addition = () =>{
   request.setRequestHeader("Content-Type", "application/json");
   request.send(objetRequest);
 });
-  };
+};
 
   //Au click sur le btn de validation du formulaire
   validForm = () =>{
@@ -397,7 +402,7 @@ addition = () =>{
     let btnForm = document.getElementById("envoiPost");
     btnForm.addEventListener("click", function(){
       //Lancement des verifications du panier et du form => si Ok envoi
-      if(checkPanier() == true && checkInput() != null){
+      if(checkPanier() === true && checkInput() != null){
       	console.log("Administration : L'envoi peut etre fait");
       //Création de l'objet à envoyer
       let objet = {
@@ -431,7 +436,7 @@ resultOrder = () =>{
     document.getElementById("lastName").innerHTML = order.contact.lastName
     document.getElementById("orderId").innerHTML = order.orderId
     document.getElementById("date").innerHTML = Date();
-    
+
     
     //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
     sessionStorage.removeItem("order");

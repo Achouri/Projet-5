@@ -136,6 +136,12 @@ body {
   padding: 0px;
 }
 
+#panierVide {
+  text-align: center;
+  font-size: 25px;
+  color: blue;
+}
+
 table {
   margin: 50px auto;
   border: none;
